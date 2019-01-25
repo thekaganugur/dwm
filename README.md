@@ -14,3 +14,4 @@ Patches:
 - Scrollback
 - No bold colors
 - Solarized
+- Clipboard
