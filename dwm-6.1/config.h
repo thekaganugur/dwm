@@ -1,10 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char *fonts[] = {
-	"monospace:size=10"
-};
-static const char dmenufont[]       = "monospace:size=10";
+static const char *fonts[] = { "monospace:size=12" };
+static const char dmenufont[]       = "monospace:size=12";
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#222222";
 static const char normfgcolor[]     = "#bbbbbb";
@@ -49,6 +47,12 @@ static const Layout layouts[] = {
 	{ MODKEY|ShiftMask,             KEY,      tag,            {.ui = 1 << TAG} }, \
 	{ MODKEY|ControlMask|ShiftMask, KEY,      toggletag,      {.ui = 1 << TAG} },
 
+#define XF86MonBrightnessUp 0x1008ff02
+#define XF86MonBrightnessDown 0x1008ff03
+#define XF86AudioRaiseVolume 0x1008ff13
+#define XF86AudioLowerVolume 0x1008ff11
+#define XF86AudioMute 0x1008ff12
+
 /* helper for spawning shell commands in the pre dwm-5.0 fashion */
 #define SHCMD(cmd) { .v = (const char*[]){ "/bin/sh", "-c", cmd, NULL } }
 
@@ -56,6 +60,13 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
 static const char *termcmd[]  = { "st", NULL };
+
+static const char *cmdbrightnessup[]  = { "xbacklight", "-inc", "15", NULL };
+static const char *cmdbrightnessdown[]  = { "xbacklight", "-dec", "15", NULL };
+static const char *cmdsoundup[]  = { "amixer", "-q", "-D", "pulse", "sset", "Master", "5%+", NULL };
+static const char *cmdsounddown[]  = { "amixer", "-q", "-D", "pulse",  "sset", "Master", "5%-", NULL };
+static const char *cmdsoundtoggle[]  = { "amixer", "-q", "-D", "pulse",  "sset", "Master", "toggle", NULL };
+
 
 static Key keys[] = {
 	/* modifier                     key        function        argument */
@@ -92,6 +103,11 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+	{ 0,                            XF86MonBrightnessUp,       spawn,         {.v = cmdbrightnessup } },
+	{ 0,                            XF86MonBrightnessDown,     spawn,         {.v = cmdbrightnessdown } },
+	{ 0,                            XF86AudioRaiseVolume,      spawn,          {.v = cmdsoundup } },
+	{ 0,                            XF86AudioLowerVolume,      spawn,          {.v = cmdsounddown } },
+	{ 0,                            XF86AudioMute,             spawn,          {.v = cmdsoundtoggle } },
 };
 
 /* button definitions */
