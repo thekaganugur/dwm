@@ -10,6 +10,7 @@ Patches:
 
 Patches:
 
-- st-no bold colors
-- solarized
 - Vertcenter
+- Scrollback
+- No bold colors
+- Solarized
