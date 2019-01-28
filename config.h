@@ -73,6 +73,7 @@ static const char *cmdsoundup[]  = { "amixer", "-q", "-D", "pulse", "sset", "Mas
 static const char *cmdsounddown[]  = { "amixer", "-q", "-D", "pulse",  "sset", "Master", "5%-", NULL };
 static const char *cmdsoundtoggle[]  = { "amixer", "-q", "-D", "pulse",  "sset", "Master", "toggle", NULL };
 static const char *cmdchrome[]  = { "google-chrome-stable", NULL };
+static const char *cmdfirefox[]  = { "firefox", NULL };
 static const char *cmdnetworkmanager[]  = { "st", "nmtui", NULL };
 static const char *cmdspotify[]  = { "com.spotify.Client", NULL };
 
@@ -117,7 +118,7 @@ static Key keys[] = {
 	{ 0,                            XF86AudioRaiseVolume,      spawn,          {.v = cmdsoundup } },
 	{ 0,                            XF86AudioLowerVolume,      spawn,          {.v = cmdsounddown } },
 	{ 0,                            XF86AudioMute,             spawn,          {.v = cmdsoundtoggle } },
-	{ MODKEY,                       XK_w,      spawn,          {.v = cmdchrome } },
+	{ MODKEY,                       XK_w,      spawn,          {.v = cmdfirefox } },
 	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = cmdnetworkmanager} },
 	{ MODKEY,                       XK_s,      spawn,          {.v = cmdspotify } },
 };
