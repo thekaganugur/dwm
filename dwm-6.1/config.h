@@ -23,8 +23,14 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+        /* class                        instance    title           tagmask     isfloating  monitor */
+	{ "Spotify",  NULL,       NULL,       1 << 8,       0,           -1 },
+        { "Spotify",                    NULL,       NULL,           4,          False,      0 },
+        { "Spotify",                    NULL,       "Spotify",           4,          False,      0 },
+        { NULL,                    NULL,       "Spotify",           4,          False,      0 },
+        { NULL,                   "Spotify",       NULL,           4,          False,      0 },
+        { "com.spotify.Client",                    NULL,       NULL,           4,          False,      0 },
+
 };
 
 /* layout(s) */
@@ -66,6 +72,9 @@ static const char *cmdbrightnessdown[]  = { "xbacklight", "-dec", "15", NULL };
 static const char *cmdsoundup[]  = { "amixer", "-q", "-D", "pulse", "sset", "Master", "5%+", NULL };
 static const char *cmdsounddown[]  = { "amixer", "-q", "-D", "pulse",  "sset", "Master", "5%-", NULL };
 static const char *cmdsoundtoggle[]  = { "amixer", "-q", "-D", "pulse",  "sset", "Master", "toggle", NULL };
+static const char *cmdchrome[]  = { "google-chrome-stable", NULL };
+static const char *cmdnetworkmanager[]  = { "st", "nmtui", NULL };
+static const char *cmdspotify[]  = { "com.spotify.Client", NULL };
 
 
 static Key keys[] = {
@@ -108,6 +117,9 @@ static Key keys[] = {
 	{ 0,                            XF86AudioRaiseVolume,      spawn,          {.v = cmdsoundup } },
 	{ 0,                            XF86AudioLowerVolume,      spawn,          {.v = cmdsounddown } },
 	{ 0,                            XF86AudioMute,             spawn,          {.v = cmdsoundtoggle } },
+	{ MODKEY,                       XK_w,      spawn,          {.v = cmdchrome } },
+	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = cmdnetworkmanager} },
+	{ MODKEY,                       XK_s,      spawn,          {.v = cmdspotify } },
 };
 
 /* button definitions */
