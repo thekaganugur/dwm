@@ -1,0 +1,19 @@
+My suckless dwm build.
+============================
+dwm is an extremely fast, small, and dynamic window manager for X.
+
+
+Applied patches:
+------------
+- None
+
+Requirements
+------------
+In order to build dwm you need the Xlib header files.
+
+Installation
+------------
+make clean install
+
+Keybindings
+------------
