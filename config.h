@@ -76,6 +76,7 @@ static const char *cmdchrome[]  = { "google-chrome-stable", NULL };
 static const char *cmdfirefox[]  = { "firefox", NULL };
 static const char *cmdnetworkmanager[]  = { "st", "nmtui", NULL };
 static const char *cmdspotify[]  = { "com.spotify.Client", NULL };
+static const char *cmddmenucalc[]  = { "=", NULL };
 
 
 static Key keys[] = {
@@ -121,6 +122,7 @@ static Key keys[] = {
 	{ MODKEY,                       XK_w,      spawn,          {.v = cmdfirefox } },
 	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = cmdnetworkmanager} },
 	{ MODKEY,                       XK_s,      spawn,          {.v = cmdspotify } },
+	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = cmddmenucalc } },
 };
 
 /* button definitions */
