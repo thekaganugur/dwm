@@ -77,6 +77,8 @@ static const char *cmdfirefox[]  = { "firefox", NULL };
 static const char *cmdnetworkmanager[]  = { "st", "nmtui", NULL };
 static const char *cmdspotify[]  = { "com.spotify.Client", NULL };
 static const char *cmddmenucalc[]  = { "=", NULL };
+static const char *cmdouputint[]  = { "pacmd", "set-card-profile", "alsa_card.pci-0000_00_1f.3", "output:analog-stereo", NULL };
+static const char *cmdouputext[]  = { "pacmd", "set-card-profile", "alsa_card.pci-0000_00_1f.3", "output:iec958-stereo", NULL };
 
 
 static Key keys[] = {
@@ -123,6 +125,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = cmdnetworkmanager} },
 	{ MODKEY,                       XK_s,      spawn,          {.v = cmdspotify } },
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = cmddmenucalc } },
+	{ MODKEY|ShiftMask,             XK_F11,      spawn,          {.v = cmdouputext } },
+	{ MODKEY|ShiftMask,             XK_F12,      spawn,          {.v = cmdouputint } },
 };
 
 /* button definitions */
