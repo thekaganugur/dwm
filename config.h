@@ -1,8 +1,8 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char *fonts[] = { "monospace:size=12" };
-static const char dmenufont[]       = "monospace:size=12";
+static const char *fonts[] = { "monospace:size=16" };
+static const char dmenufont[]       = "monospace:size=16";
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#222222";
 static const char normfgcolor[]     = "#bbbbbb";
@@ -24,7 +24,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
         /* class                        instance    title           tagmask     isfloating  monitor */
-	{ "Spotify",  NULL,       NULL,       1 << 8,       0,           -1 },
+    	{ "Spotify",  NULL,       NULL,       1 << 8,       0,           -1 },
         { "Spotify",                    NULL,       NULL,           4,          False,      0 },
         { "Spotify",                    NULL,       "Spotify",           4,          False,      0 },
         { NULL,                    NULL,       "Spotify",           4,          False,      0 },
@@ -72,7 +72,6 @@ static const char *cmdbrightnessdown[]  = { "xbacklight", "-dec", "15", NULL };
 static const char *cmdsoundup[]  = { "amixer", "-q", "-D", "pulse", "sset", "Master", "5%+", NULL };
 static const char *cmdsounddown[]  = { "amixer", "-q", "-D", "pulse",  "sset", "Master", "5%-", NULL };
 static const char *cmdsoundtoggle[]  = { "amixer", "-q", "-D", "pulse",  "sset", "Master", "toggle", NULL };
-static const char *cmdchrome[]  = { "google-chrome-stable", NULL };
 static const char *cmdfirefox[]  = { "firefox", NULL };
 static const char *cmdnetworkmanager[]  = { "st", "nmtui", NULL };
 static const char *cmdspotify[]  = { "com.spotify.Client", NULL };
