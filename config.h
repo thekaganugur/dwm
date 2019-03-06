@@ -2,14 +2,14 @@
 
 /* appearance */
 static const char *fonts[] = { "monospace:size=14" };
-static const char dmenufont[]       = "monospace:size=14";
+static const char dmenufont[]       = "monospace:size=16";
 static const char normbordercolor[] = "#444444";
 static const char normbgcolor[]     = "#222222";
 static const char normfgcolor[]     = "#bbbbbb";
 static const char selbordercolor[]  = "#005577";
 static const char selbgcolor[]      = "#005577";
 static const char selfgcolor[]      = "#eeeeee";
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
@@ -25,18 +25,12 @@ static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
         /* class                        instance    title           tagmask     isfloating  monitor */
     	{ "Spotify",  NULL,       NULL,       1 << 8,       0,           -1 },
-        { "Spotify",                    NULL,       NULL,           4,          False,      0 },
-        { "Spotify",                    NULL,       "Spotify",           4,          False,      0 },
-        { NULL,                    NULL,       "Spotify",           4,          False,      0 },
-        { NULL,                   "Spotify",       NULL,           4,          False,      0 },
-        { "com.spotify.Client",                    NULL,       NULL,           4,          False,      0 },
-
 };
 
 /* layout(s) */
-static const float mfact     = 0.545; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -78,6 +72,12 @@ static const char *cmdspotify[]  = { "com.spotify.Client", NULL };
 static const char *cmddmenucalc[]  = { "=", NULL };
 static const char *cmdouputint[]  = { "pacmd", "set-card-profile", "alsa_card.pci-0000_00_1f.3", "output:analog-stereo", NULL };
 static const char *cmdouputext[]  = { "pacmd", "set-card-profile", "alsa_card.pci-0000_00_1f.3", "output:iec958-stereo", NULL };
+static const char *cmdddmenuumount[]  = { "dmenuumount", NULL };
+static const char *cmdddmenumount[]  = { "dmenumount", NULL };
+static const char *cmddmenusessionmanager[]  = { "dmenusessionmanager", NULL };
+static const char *cmdlock[]  = { "slock", NULL };
+static const char *cmddmenuunicode[]  = { "dmenuunicode", NULL };
+static const char *cmdshowclip[]  = { "showclip", NULL };
 
 
 static Key keys[] = {
@@ -126,6 +126,12 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = cmddmenucalc } },
 	{ MODKEY|ShiftMask,             XK_F11,      spawn,          {.v = cmdouputext } },
 	{ MODKEY|ShiftMask,             XK_F12,      spawn,          {.v = cmdouputint } },
+	{ MODKEY|ShiftMask,             XK_u,      spawn,          {.v = cmdddmenuumount} },
+	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = cmdddmenumount} },
+	{ MODKEY|ControlMask,           XK_Delete,      spawn,          {.v = cmddmenusessionmanager} },
+	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = cmdlock} },
+	{ MODKEY,                       XK_quotedbl,      spawn,          {.v = cmddmenuunicode} },
+	{ MODKEY|ShiftMask,             XK_quotedbl,      spawn,          {.v = cmdshowclip} },
 };
 
 /* button definitions */
