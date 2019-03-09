@@ -30,7 +30,7 @@ static const Rule rules[] = {
 /* layout(s) */
 static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
-static const int resizehints = 0;    /* 1 means respect size hints in tiled resizals */
+static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
@@ -78,6 +78,8 @@ static const char *cmddmenusessionmanager[]  = { "dmenusessionmanager", NULL };
 static const char *cmdlock[]  = { "slock", NULL };
 static const char *cmddmenuunicode[]  = { "dmenuunicode", NULL };
 static const char *cmdshowclip[]  = { "showclip", NULL };
+static const char *clipcmd[]  = { "clipmenu", "-fn", dmenufont, NULL };
+static const char *urlcmd[]  = { "clipmenu-url", "-fn", dmenufont, NULL };
 
 
 static Key keys[] = {
@@ -132,6 +134,8 @@ static Key keys[] = {
 	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = cmdlock} },
 	{ MODKEY,                       XK_quotedbl,      spawn,          {.v = cmddmenuunicode} },
 	{ MODKEY|ShiftMask,             XK_quotedbl,      spawn,          {.v = cmdshowclip} },
+    { MODKEY,                       XK_Insert, spawn,          {.v = clipcmd } },
+    { MODKEY,                       XK_o,      spawn,          {.v = urlcmd } },
 };
 
 /* button definitions */
