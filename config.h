@@ -80,6 +80,8 @@ static const char *cmddmenuunicode[]  = { "dmenuunicode", NULL };
 static const char *cmdshowclip[]  = { "showclip", NULL };
 static const char *clipcmd[]  = { "clipmenu", "-fn", dmenufont, NULL };
 static const char *urlcmd[]  = { "clipmenu-url", "-fn", dmenufont, NULL };
+static const char *dmenuwebsearchcmd[]  = { "dmenuwebsearch", "-fn", dmenufont, NULL };
+static const char *dmenubrowsecmd[]  = { "dmenubrowse", "-fn", dmenufont, NULL };
 
 
 static Key keys[] = {
@@ -122,20 +124,22 @@ static Key keys[] = {
 	{ 0,                            XF86AudioRaiseVolume,      spawn,          {.v = cmdsoundup } },
 	{ 0,                            XF86AudioLowerVolume,      spawn,          {.v = cmdsounddown } },
 	{ 0,                            XF86AudioMute,             spawn,          {.v = cmdsoundtoggle } },
-	{ MODKEY,                       XK_w,      spawn,          {.v = cmdfirefox } },
-	{ MODKEY|ShiftMask,             XK_w,      spawn,          {.v = cmdnetworkmanager} },
-	{ MODKEY,                       XK_s,      spawn,          {.v = cmdspotify } },
-	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = cmddmenucalc } },
-	{ MODKEY|ShiftMask,             XK_F11,      spawn,          {.v = cmdouputext } },
-	{ MODKEY|ShiftMask,             XK_F12,      spawn,          {.v = cmdouputint } },
-	{ MODKEY|ShiftMask,             XK_u,      spawn,          {.v = cmdddmenuumount} },
-	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = cmdddmenumount} },
+	{ MODKEY,                       XK_w,           spawn,          {.v = cmdfirefox } },
+	{ MODKEY|ShiftMask,             XK_w,           spawn,          {.v = cmdnetworkmanager} },
+	{ MODKEY,                       XK_s,           spawn,          {.v = cmdspotify } },
+	{ MODKEY|ShiftMask,             XK_l,           spawn,          {.v = cmddmenucalc } },
+	{ MODKEY|ShiftMask,             XK_F11,         spawn,          {.v = cmdouputext } },
+	{ MODKEY|ShiftMask,             XK_F12,         spawn,          {.v = cmdouputint } },
+	{ MODKEY|ShiftMask,             XK_u,           spawn,          {.v = cmdddmenuumount} },
+	{ MODKEY|ShiftMask,             XK_m,           spawn,          {.v = cmdddmenumount} },
 	{ MODKEY|ControlMask,           XK_Delete,      spawn,          {.v = cmddmenusessionmanager} },
-	{ MODKEY|ControlMask,           XK_l,      spawn,          {.v = cmdlock} },
-	{ MODKEY,                       XK_quotedbl,      spawn,          {.v = cmddmenuunicode} },
-	{ MODKEY|ShiftMask,             XK_quotedbl,      spawn,          {.v = cmdshowclip} },
-    { MODKEY,                       XK_Insert, spawn,          {.v = clipcmd } },
-    { MODKEY,                       XK_o,      spawn,          {.v = urlcmd } },
+	{ MODKEY|ControlMask,           XK_l,           spawn,          {.v = cmdlock} },
+	{ MODKEY,                       XK_quotedbl,    spawn,          {.v = cmddmenuunicode} },
+	{ MODKEY|ShiftMask,             XK_quotedbl,    spawn,          {.v = cmdshowclip} },
+    { MODKEY,                       XK_Insert,      spawn,          {.v = clipcmd } },
+    { MODKEY|ShiftMask,             XK_Insert,      spawn,          {.v = urlcmd } },
+    { MODKEY|ShiftMask,             XK_o,           spawn,          {.v = dmenuwebsearchcmd } },
+    { MODKEY,                       XK_o,           spawn,          {.v = dmenubrowsecmd} },
 };
 
 /* button definitions */
