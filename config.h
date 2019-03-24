@@ -139,8 +139,8 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_quotedbl,    spawn,          {.v = showclipcmd} },
 	{ MODKEY,                       XK_s,           spawn,          {.v = musiccmd } },
 
-	{ MODKEY|ShiftMask,             XK_u,           spawn,          {.v = mountcmd} },
-	{ MODKEY|ShiftMask,             XK_m,           spawn,          {.v = umountcmd} },
+	{ MODKEY|ShiftMask,             XK_m,           spawn,          {.v = mountcmd} },
+	{ MODKEY|ShiftMask,             XK_u,           spawn,          {.v = umountcmd} },
 	{ MODKEY|ControlMask,           XK_Delete,      spawn,          {.v = sessionmngrcmd} },
 	{ MODKEY,                       XK_quotedbl,    spawn,          {.v = unicodecmd} },
     { MODKEY|ShiftMask,             XK_o,           spawn,          {.v = dwebsearchcmd } },
