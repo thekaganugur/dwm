@@ -89,6 +89,14 @@ static const char *clipmenucmd[]  = { "clipmenu", "-fn", dmenufont, NULL };
 static const char *clipmenuurlcmd[]  = { "clipmenuurl", "-fn", dmenufont, NULL };
 
 
+static const char *sscmd[]  = { "maim", "$HOME/xx.png", NULL };
+static const char *sswindowcmd[]  = { "maim", "-i", "$(xdotool getactivewindow)", ">", "~/$(date +%F-%s).png", NULL };
+// static const char *ssregioncmd[]  = { "maim", "-s", ">", "~/$(date +%F-%s).png", NULL };
+// static const char *ssclipcmd[]  = { "maim", "|", "xclip", "-selection", "clipboard", "-t", "image/png", NULL };
+// static const char *sswindowclipcmd[]  = { "maim", "-i", "$(xdotool getactivewindow)", "|", "xclip", "-selection", "clipboard", "-t", "image/png", NULL };
+// static const char *ssregionclipcmd[]  = { "maim", "-s", "|", "xclip", "-selection", "clipboard", "-t", "image/png", NULL };
+
+
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
@@ -132,6 +140,11 @@ static Key keys[] = {
 	{ 0,                            XF86AudioMute,             spawn,          {.v = soundtogglecmd } },
 	{ MODKEY|ShiftMask,             XK_F11,         spawn,          {.v = ouputextcmd } },
 	{ MODKEY|ShiftMask,             XK_F12,         spawn,          {.v = ouputintcmd } },
+
+    { 0,                            XK_Print,      spawn,           SHCMD("maim ~/$(date +%F-%s).png") },
+	// { 0,                            XK_Print,      spawn,          {.v = sscmd} },
+    { MODKEY,                       XK_Print,      spawn,          {.v = sswindowcmd} },
+    // { MODKEY|ShiftMask,             XK_PrintScreen,      spawn,          {.v = } },
 
 	{ MODKEY,                       XK_w,           spawn,          {.v = browsercmd } },
 	{ MODKEY|ShiftMask,             XK_w,           spawn,          {.v = networkmanagercmd} },
