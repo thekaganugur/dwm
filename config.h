@@ -1,18 +1,22 @@
 /* See LICENSE file for copyright and license details. */
 
 /* appearance */
-static const char *fonts[] = { "monospace:size=14" };
-static const char dmenufont[]       = "monospace:size=16";
-static const char normbordercolor[] = "#444444";
-static const char normbgcolor[]     = "#222222";
-static const char normfgcolor[]     = "#bbbbbb";
-static const char selbordercolor[]  = "#005577";
-static const char selbgcolor[]      = "#005577";
-static const char selfgcolor[]      = "#eeeeee";
 static const unsigned int borderpx  = 2;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const char *fonts[]          = { "monospace:size=14" };
+static const char dmenufont[]       = "monospace:size=16";
+static const char col_gray1[]       = "#222222";
+static const char col_gray2[]       = "#444444";
+static const char col_gray3[]       = "#bbbbbb";
+static const char col_gray4[]       = "#eeeeee";
+static const char col_cyan[]        = "#005577";
+static const char *colors[][3]      = {
+	/*               fg         bg         border   */
+	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
+	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
+};
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
@@ -23,8 +27,8 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-        /* class                        instance    title           tagmask     isfloating  monitor */
-    	{ "Spotify",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
+	/* { "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 }, */
 };
 
 /* layout(s) */
@@ -58,30 +62,31 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbgcolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "st", NULL };
 
-static const char *cmdbrightnessup[]  = { "xbacklight", "-inc", "15", NULL };
-static const char *cmdbrightnessdown[]  = { "xbacklight", "-dec", "15", NULL };
-static const char *cmdsoundup[]  = { "amixer", "-q", "-D", "pulse", "sset", "Master", "5%+", NULL };
-static const char *cmdsounddown[]  = { "amixer", "-q", "-D", "pulse",  "sset", "Master", "5%-", NULL };
-static const char *cmdsoundtoggle[]  = { "amixer", "-q", "-D", "pulse",  "sset", "Master", "toggle", NULL };
-static const char *cmdfirefox[]  = { "firefox", NULL };
-static const char *cmdnetworkmanager[]  = { "st", "nmtui", NULL };
-static const char *cmdspotify[]  = { "com.spotify.Client", NULL };
-static const char *cmddmenucalc[]  = { "=", NULL };
-static const char *cmdouputint[]  = { "pacmd", "set-card-profile", "alsa_card.pci-0000_00_1f.3", "output:analog-stereo", NULL };
-static const char *cmdouputext[]  = { "pacmd", "set-card-profile", "alsa_card.pci-0000_00_1f.3", "output:iec958-stereo", NULL };
-static const char *cmdddmenuumount[]  = { "dmenuumount", NULL };
-static const char *cmdddmenumount[]  = { "dmenumount", NULL };
-static const char *cmddmenusessionmanager[]  = { "dmenusessionmanager", NULL };
-static const char *cmdlock[]  = { "slock", NULL };
-static const char *cmddmenuunicode[]  = { "dmenuunicode", NULL };
-static const char *cmdshowclip[]  = { "showclip", NULL };
-static const char *clipcmd[]  = { "clipmenu", "-fn", dmenufont, NULL };
-static const char *urlcmd[]  = { "clipmenu-url", "-fn", dmenufont, NULL };
-static const char *dmenuwebsearchcmd[]  = { "dmenuwebsearch", "-fn", dmenufont, NULL };
-static const char *dmenubrowsecmd[]  = { "dmenubrowse", "-fn", dmenufont, NULL };
+static const char *brightnessupcmd[]  = { "xbacklight", "-inc", "15", NULL };
+static const char *brightnessdowncmd[]  = { "xbacklight", "-dec", "15", NULL };
+static const char *soundupcmd[]  = { "amixer", "-q", "-D", "pulse", "sset", "Master", "5%+", NULL };
+static const char *sounddowncmd[]  = { "amixer", "-q", "-D", "pulse",  "sset", "Master", "5%-", NULL };
+static const char *soundtogglecmd[]  = { "amixer", "-q", "-D", "pulse",  "sset", "Master", "toggle", NULL };
+static const char *ouputintcmd[]  = { "pacmd", "set-card-profile", "alsa_card.pci-0000_00_1f.3", "output:analog-stereo", NULL };
+static const char *ouputextcmd[]  = { "pacmd", "set-card-profile", "alsa_card.pci-0000_00_1f.3", "output:iec958-stereo", NULL };
+
+static const char *browsercmd[]  = { "firefox", NULL };
+static const char *networkmanagercmd[]  = { "st", "nmtui", NULL };
+static const char *lockcmd[]  = { "slock", NULL };
+static const char *showclipcmd[]  = { "showclip", NULL };
+static const char *musiccmd[]  = { "com.spotify.Client", NULL };
+
+static const char *mountcmd[]  = { "dmount", NULL };
+static const char *umountcmd[]  = { "dumount", NULL };
+static const char *sessionmngrcmd[]  = { "dsessionmngr", NULL };
+static const char *unicodecmd[]  = { "dunicode", NULL };
+static const char *dwebsearchcmd[]  = { "dwebsearch", "-fn", dmenufont, NULL };
+static const char *dbrowsecmd[]  = { "dbrowse", "-fn", dmenufont, NULL };
+static const char *clipmenucmd[]  = { "clipmenu", "-fn", dmenufont, NULL };
+static const char *clipmenuurlcmd[]  = { "clipmenuurl", "-fn", dmenufont, NULL };
 
 
 static Key keys[] = {
@@ -119,31 +124,33 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
-	{ 0,                            XF86MonBrightnessUp,       spawn,         {.v = cmdbrightnessup } },
-	{ 0,                            XF86MonBrightnessDown,     spawn,         {.v = cmdbrightnessdown } },
-	{ 0,                            XF86AudioRaiseVolume,      spawn,          {.v = cmdsoundup } },
-	{ 0,                            XF86AudioLowerVolume,      spawn,          {.v = cmdsounddown } },
-	{ 0,                            XF86AudioMute,             spawn,          {.v = cmdsoundtoggle } },
-	{ MODKEY,                       XK_w,           spawn,          {.v = cmdfirefox } },
-	{ MODKEY|ShiftMask,             XK_w,           spawn,          {.v = cmdnetworkmanager} },
-	{ MODKEY,                       XK_s,           spawn,          {.v = cmdspotify } },
-	{ MODKEY|ShiftMask,             XK_l,           spawn,          {.v = cmddmenucalc } },
-	{ MODKEY|ShiftMask,             XK_F11,         spawn,          {.v = cmdouputext } },
-	{ MODKEY|ShiftMask,             XK_F12,         spawn,          {.v = cmdouputint } },
-	{ MODKEY|ShiftMask,             XK_u,           spawn,          {.v = cmdddmenuumount} },
-	{ MODKEY|ShiftMask,             XK_m,           spawn,          {.v = cmdddmenumount} },
-	{ MODKEY|ControlMask,           XK_Delete,      spawn,          {.v = cmddmenusessionmanager} },
-	{ MODKEY|ControlMask,           XK_l,           spawn,          {.v = cmdlock} },
-	{ MODKEY,                       XK_quotedbl,    spawn,          {.v = cmddmenuunicode} },
-	{ MODKEY|ShiftMask,             XK_quotedbl,    spawn,          {.v = cmdshowclip} },
-    { MODKEY,                       XK_Insert,      spawn,          {.v = clipcmd } },
-    { MODKEY|ShiftMask,             XK_Insert,      spawn,          {.v = urlcmd } },
-    { MODKEY|ShiftMask,             XK_o,           spawn,          {.v = dmenuwebsearchcmd } },
-    { MODKEY,                       XK_o,           spawn,          {.v = dmenubrowsecmd} },
+
+	{ 0,                            XF86MonBrightnessUp,       spawn,         {.v = brightnessupcmd } },
+	{ 0,                            XF86MonBrightnessDown,     spawn,         {.v = brightnessdowncmd } },
+	{ 0,                            XF86AudioRaiseVolume,      spawn,          {.v = soundupcmd } },
+	{ 0,                            XF86AudioLowerVolume,      spawn,          {.v = sounddowncmd } },
+	{ 0,                            XF86AudioMute,             spawn,          {.v = soundtogglecmd } },
+	{ MODKEY|ShiftMask,             XK_F11,         spawn,          {.v = ouputextcmd } },
+	{ MODKEY|ShiftMask,             XK_F12,         spawn,          {.v = ouputintcmd } },
+
+	{ MODKEY,                       XK_w,           spawn,          {.v = browsercmd } },
+	{ MODKEY|ShiftMask,             XK_w,           spawn,          {.v = networkmanagercmd} },
+	{ MODKEY|ControlMask,           XK_l,           spawn,          {.v = lockcmd} },
+	{ MODKEY|ShiftMask,             XK_quotedbl,    spawn,          {.v = showclipcmd} },
+	{ MODKEY,                       XK_s,           spawn,          {.v = musiccmd } },
+
+	{ MODKEY|ShiftMask,             XK_u,           spawn,          {.v = mountcmd} },
+	{ MODKEY|ShiftMask,             XK_m,           spawn,          {.v = umountcmd} },
+	{ MODKEY|ControlMask,           XK_Delete,      spawn,          {.v = sessionmngrcmd} },
+	{ MODKEY,                       XK_quotedbl,    spawn,          {.v = unicodecmd} },
+    { MODKEY|ShiftMask,             XK_o,           spawn,          {.v = dwebsearchcmd } },
+    { MODKEY,                       XK_o,           spawn,          {.v = dbrowsecmd} },
+    { MODKEY,                       XK_Insert,      spawn,          {.v = clipmenucmd } },
+    { MODKEY|ShiftMask,             XK_Insert,      spawn,          {.v = clipmenuurlcmd } },
 };
 
 /* button definitions */
-/* click can be ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
+/* click can be ClkTagBar, ClkLtSymbol, ClkStatusText, ClkWinTitle, ClkClientWin, or ClkRootWin */
 static Button buttons[] = {
 	/* click                event mask      button          function        argument */
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },

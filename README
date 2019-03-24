@@ -2,7 +2,6 @@ My suckless dwm build.
 ============================
 dwm is an extremely fast, small, and dynamic window manager for X.
 
-
 Applied patches:
 ------------
 - None
@@ -10,11 +9,7 @@ Applied patches:
 Requirements
 ------------
 In order to build dwm you need the Xlib header files.
-For super+mask+l to work gingivitis/dmenu-dictionary must be installed.
 
 Installation
 ------------
 make clean install
-
-Keybindings
-------------
