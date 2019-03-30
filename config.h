@@ -83,14 +83,15 @@ static const char *mountcmd[]  = { "dmount", NULL };
 static const char *umountcmd[]  = { "dumount", NULL };
 static const char *sessionmngrcmd[]  = { "dsessionmngr", NULL };
 static const char *unicodecmd[]  = { "dunicode", NULL };
-static const char *dwebsearchcmd[]  = { "dwebsearch", "-fn", dmenufont, NULL };
-static const char *dbrowsecmd[]  = { "dbrowse", "-fn", dmenufont, NULL };
 static const char *clipmenucmd[]  = { "clipmenu", "-fn", dmenufont, NULL };
 static const char *clipmenuurlcmd[]  = { "clipmenuurl", "-fn", dmenufont, NULL };
 
+static const char *filemanagercmd[]  = { "st", "vifm", NULL };
+static const char *filemanagerxcmd[]  = { "pcmanfm", NULL };
 
-static const char *sscmd[]  = { "maim", "$HOME/xx.png", NULL };
-static const char *sswindowcmd[]  = { "maim", "-i", "$(xdotool getactivewindow)", ">", "~/$(date +%F-%s).png", NULL };
+
+// static const char *sscmd[]  = { "maim", "$HOME/xx.png", NULL };
+// static const char *sswindowcmd[]  = { "maim", "-i", "$(xdotool getactivewindow)", ">", "~/$(date +%F-%s).png", NULL };
 // static const char *ssregioncmd[]  = { "maim", "-s", ">", "~/$(date +%F-%s).png", NULL };
 // static const char *ssclipcmd[]  = { "maim", "|", "xclip", "-selection", "clipboard", "-t", "image/png", NULL };
 // static const char *sswindowclipcmd[]  = { "maim", "-i", "$(xdotool getactivewindow)", "|", "xclip", "-selection", "clipboard", "-t", "image/png", NULL };
@@ -132,18 +133,22 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 	{ MODKEY|ShiftMask,             XK_q,      quit,           {0} },
+/* -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  -  - - - - - - - - - - - - - - */
+    { MODKEY|ControlMask,           XK_Return,                 spawn,         SHCMD("samedir") },
 
 	{ 0,                            XF86MonBrightnessUp,       spawn,         {.v = brightnessupcmd } },
 	{ 0,                            XF86MonBrightnessDown,     spawn,         {.v = brightnessdowncmd } },
-	{ 0,                            XF86AudioRaiseVolume,      spawn,          {.v = soundupcmd } },
-	{ 0,                            XF86AudioLowerVolume,      spawn,          {.v = sounddowncmd } },
-	{ 0,                            XF86AudioMute,             spawn,          {.v = soundtogglecmd } },
+	{ 0,                            XF86AudioRaiseVolume,      spawn,         {.v = soundupcmd } },
+	{ 0,                            XF86AudioLowerVolume,      spawn,         {.v = sounddowncmd } },
+	{ 0,                            XF86AudioMute,             spawn,         {.v = soundtogglecmd } },
 	{ MODKEY|ShiftMask,             XK_F11,         spawn,          {.v = ouputextcmd } },
 	{ MODKEY|ShiftMask,             XK_F12,         spawn,          {.v = ouputintcmd } },
 
     { 0,                            XK_Print,      spawn,           SHCMD("maim ~/$(date +%F-%s).png") },
+    { MODKEY,                       XK_Print,      spawn,           SHCMD("maim -i $(xdotool getactivewindow) > ~/$(date +%F-%s).png") },
+    { ShiftMask,                    XK_Print,      spawn,           SHCMD("maim -s > ~/$(date +%F-%s).png") },
 	// { 0,                            XK_Print,      spawn,          {.v = sscmd} },
-    { MODKEY,                       XK_Print,      spawn,          {.v = sswindowcmd} },
+    // { MODKEY,                       XK_Print,      spawn,          {.v = sswindowcmd} },
     // { MODKEY|ShiftMask,             XK_PrintScreen,      spawn,          {.v = } },
 
 	{ MODKEY,                       XK_w,           spawn,          {.v = browsercmd } },
@@ -156,10 +161,11 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_u,           spawn,          {.v = umountcmd} },
 	{ MODKEY|ControlMask,           XK_Delete,      spawn,          {.v = sessionmngrcmd} },
 	{ MODKEY,                       XK_quotedbl,    spawn,          {.v = unicodecmd} },
-    { MODKEY|ShiftMask,             XK_o,           spawn,          {.v = dwebsearchcmd } },
-    { MODKEY,                       XK_o,           spawn,          {.v = dbrowsecmd} },
     { MODKEY,                       XK_Insert,      spawn,          {.v = clipmenucmd } },
     { MODKEY|ShiftMask,             XK_Insert,      spawn,          {.v = clipmenuurlcmd } },
+
+	{ MODKEY,                       XK_e,           spawn,          {.v = filemanagercmd} },
+	{ MODKEY|ShiftMask,             XK_e,           spawn,          {.v = filemanagerxcmd} },
 };
 
 /* button definitions */
