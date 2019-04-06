@@ -166,6 +166,8 @@ static Key keys[] = {
 
 	{ MODKEY,                       XK_e,           spawn,          {.v = filemanagercmd} },
 	{ MODKEY|ShiftMask,             XK_e,           spawn,          {.v = filemanagerxcmd} },
+
+	{ MODKEY,                       XK_c,           spawn,          SHCMD("st -e calcurse -D ~/.config/calcurse") },
 };
 
 /* button definitions */
