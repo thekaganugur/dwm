@@ -89,6 +89,8 @@ static const char *clipmenuurlcmd[]  = { "clipmenuurl", "-fn", dmenufont, NULL }
 static const char *filemanagercmd[]  = { "st", "vifm", NULL };
 static const char *filemanagerxcmd[]  = { "pcmanfm", NULL };
 
+static const char scratchpadname[] = "scratchpad";
+static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
 
 // static const char *sscmd[]  = { "maim", "$HOME/xx.png", NULL };
 // static const char *sswindowcmd[]  = { "maim", "-i", "$(xdotool getactivewindow)", ">", "~/$(date +%F-%s).png", NULL };
@@ -154,20 +156,23 @@ static Key keys[] = {
 	{ MODKEY,                       XK_w,           spawn,          {.v = browsercmd } },
 	{ MODKEY|ShiftMask,             XK_w,           spawn,          {.v = networkmanagercmd} },
 	{ MODKEY|ControlMask,           XK_l,           spawn,          {.v = lockcmd} },
-	{ MODKEY|ShiftMask,             XK_quotedbl,    spawn,          {.v = showclipcmd} },
-	{ MODKEY,                       XK_s,           spawn,          {.v = musiccmd } },
+	// { MODKEY|ShiftMask,             XK_quotedbl,    spawn,          {.v = showclipcmd} },
+	{ MODKEY,                       XK_s,           spawn,          {.v = musiccmd} },
 
 	{ MODKEY|ShiftMask,             XK_m,           spawn,          {.v = mountcmd} },
 	{ MODKEY|ShiftMask,             XK_u,           spawn,          {.v = umountcmd} },
 	{ MODKEY|ControlMask,           XK_Delete,      spawn,          {.v = sessionmngrcmd} },
-	{ MODKEY,                       XK_quotedbl,    spawn,          {.v = unicodecmd} },
-    { MODKEY,                       XK_Insert,      spawn,          {.v = clipmenucmd } },
-    { MODKEY|ShiftMask,             XK_Insert,      spawn,          {.v = clipmenuurlcmd } },
+	{ MODKEY,                       XK_quotedbl,    togglescratch,  {.v = scratchpadcmd} },
+  { MODKEY,                       XK_Insert,      spawn,          {.v = clipmenucmd} },
+  { MODKEY|ShiftMask,             XK_Insert,      spawn,          {.v = clipmenuurlcmd} },
+  { MODKEY|ControlMask,           XK_Insert,      spawn,          {.v = showclipcmd} },
 
 	{ MODKEY,                       XK_e,           spawn,          {.v = filemanagercmd} },
 	{ MODKEY|ShiftMask,             XK_e,           spawn,          {.v = filemanagerxcmd} },
 
 	{ MODKEY,                       XK_c,           spawn,          SHCMD("st -e calcurse -D ~/.config/calcurse") },
+
+	{ MODKEY,                       XK_F1,          spawn,  {.v = unicodecmd } },
 };
 
 /* button definitions */
