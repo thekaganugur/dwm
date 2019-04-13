@@ -90,8 +90,8 @@ static const char *filemanagercmd[]  = { "st", "vifm", NULL };
 static const char *filemanagerxcmd[]  = { "pcmanfm", NULL };
 
 static const char scratchpadname[] = "scratchpad";
-static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
-
+// static const char *scratchpadcmd[] = { "st", "-t", scratchpadname, "-g", "120x34", NULL };
+static const char *scratchpadcmd[] = { "st", "-w", "''", "-t", scratchpadname, "-g", "120x34", "-e", "tmux", NULL };
 // static const char *sscmd[]  = { "maim", "$HOME/xx.png", NULL };
 // static const char *sswindowcmd[]  = { "maim", "-i", "$(xdotool getactivewindow)", ">", "~/$(date +%F-%s).png", NULL };
 // static const char *ssregioncmd[]  = { "maim", "-s", ">", "~/$(date +%F-%s).png", NULL };
